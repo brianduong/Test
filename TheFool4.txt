@@ -6,5 +6,3 @@ Branch1 Edit
 Updated from branch2
 Updated from master
 
-Updated from branch1
-
