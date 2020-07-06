@@ -1,5 +1,5 @@
 <script>
-// Edit your script here
+// Suabaitap3
 var person = [
 {"Ho":"Trần", "Ten":"Phương", "SN": "1994", "GT": 1},
 {"Ho":"Nguyễn", "Ten":"Hồng", "SN": "1998", "GT": 0},
