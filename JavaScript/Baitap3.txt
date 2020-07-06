@@ -1,132 +1,112 @@
-//Diep Test Edited
-=======
-//Diep Test Edited lần 1
-//Diep Test Edited lần 2
-
 <script>
-// Suabaitap3
-var person = [
-{"Ho":"Trần", "Ten":"Phương", "SN": "1994", "GT": 1},
-{"Ho":"Nguyễn", "Ten":"Hồng", "SN": "1998", "GT": 0},
-{"Ho":"Đào", "Ten":"Lan", "SN": "1997", "GT": 0},
-{"Ho":"Hoàng", "Ten":"Minh", "SN": "1997", "GT": 1},
-{"Ho":"Trần", "Ten":"Hồng", "SN": "1994", "GT": 1},
-{"Ho":"Nguyễn", "Ten":"Bích", "SN": "1998", "GT": 0},
-{"Ho":"Đào", "Ten":"Bông", "SN": "1997", "GT": 1},
-{"Ho":"Hoàng", "Ten":"Ngọc", "SN": "1997", "GT": 1},
-{"Ho":"Trần", "Ten":"Anh", "SN": "1994", "GT": 0},
-{"Ho":"Nguyễn", "Ten":"Minh", "SN": "1998", "GT": 0},
-{"Ho":"Đào", "Ten":"Bích", "SN": "1997", "GT": 1}
-];
-function inPhanTu()
-{
-var i, ln;
-ln = person.length;
-for (i=0;i<ln;i++) 
-{
-var gt = (person[i].GT == 0)? "Nam": "Nữ";
-var tuoi = getAge(person[i].SN);
-document.write ("<br> Họ & Tên: " + person[i].Ho + " " + person[i].Ten + " Tuổi:" + tuoi + " Giới tính: " + gt);
+var arr = ["Hồng","Phương","Lan","Bích","Ngọc","Ánh"];
+function kiemtraSoNguyenTo(n) 
+{ 
+	var n, dem,i;
+    dem = 0
+    if (n == 2) 
+    {
+    	document.write(n + "là số nguyên tố");
+    } 
+    if (n < 2) 
+    {
+    	document.write(n + " không phải là số nguyên tố");
+    }
+    if (n > 2) 
+    {
+    for(i=2;i <= Math.sqrt(n);i++)
+    {
+    	 if(n % i == 0) 
+         {
+         	dem++;
+         }
+    }
+    if(dem == 0) 
+    {
+        document.write(n + " là số nguyên tố");
+    } else 
+    {
+    	document.write (n + " không phải là số nguyên tố");
+    }   
+    } 
 }
-}
-function addPerson()
+//Viết hàm đảo mảng cho trước
+function daoMang(arr) 
 {
-var person2 = {"Ho":"Trần", "Ten":"Bích", "SN": "1998", "GT": 1};
-person.push(person2);
-}
-function getAge(namsinh)
-{
-var date = new Date();
-var year = date.getFullYear();
-return year - namsinh;
-}
-function replaceName(ten)
-{
-var i, ln;
-ln = person.length;
-for (i=0;i<ln;i++) 
-{
-if(ten == person[i].Ten) 
-{
-person[i].Ten = "Kiwi";
-}
-}
-}
-function remove(name)
-{
- var len = person.length;
- for(var i= 0;i<len;i++) 
- {
-  if (person[i] != null) { //kiểm tra xem person [i]
-  var vName = person[i].Ten; 
-
-  if(vName==name) //Nếu tìm thấy
-  {
-   person.splice(i,1) //Xóa phần tử
-   i--; //Giữ nguyên vị trí
-  }
- }
-  
-  
- }
- 
+	document.write("<br> Mảng gốc là: " + arr);
+	var ln,i, temp;
+    ln = arr.length;
+    for (i=0; i <= ln/2 ;i++) 
+    {
+    	temp = arr[i];
+        arr[i] = arr[arr.length-1-i];
+        arr[arr.length-1-i] = temp;
+    }
+	document.write("<br> Mảng đảo chiều là: " + arr);
 }
 
-function remove1(name)
+//Viết hàm tách các số dương có trong mảng 𝑎 cho trước sang mảng 𝑏.
+var arrnumber =[0,9,11,-2,-5,8,9];
+function soNguyenDuong(value, index, array)
 {
- var len = person.length; 
- var i=0;
- var timthay = false; //Cho biến tìm thấy = false
-while (i<len)
- {
-  timthay = false; 
-  var vName = person[i].Ten;
-  if(vName==name) //Nếu tìm thấy
-  {
-   person.splice(i,1)
-   timthay = true;
-   len = person.length;
-  }
-  if (!timthay)
-  i++;
- }
+	return value >= 0;
 }
-
-
-function sapxep() {
-  person.sort(function(a, b){
-    var x = a.Ten.toLowerCase();
-    var y = b.Ten.toLowerCase();
-    if (x < y) {return -1;}
-    if (x > y) {return 1;}
-    return 0;
-  });
-inPhanTu();
-}
-
-function removeM(ten)
+function taomangSoNguyenDuong(arrnew) 
 {
-var len = person.length;
- for(var i= 0;i<len;i++) 
- {
-  if (person[i] != null) 
-  { //kiểm tra xem person [i]
-  var vName = person[i].Ten.startsWith(ten);
-  if(vName) //Nếu tìm thấy
-  {
-   person.splice(i,1) //Xóa phần tử
-   i--; 
-  }
+	var arrnew = [];
+	arrnew = arrnumber.filter(soNguyenDuong);
+    document.write("<br> Dãy các số nguyên dương là: " + arrnew);
 }
+var mang1 = [9,29,12];
+var mang2 = ["Nam", "Nữ"];
+//Viết hàm gộp (nối) hai mảng một chiều 𝑎 và 𝑏 thành một mảng một chiều theo thứ tự a,b
+function gopMang(arr1, arr2) 
+{
+	var arr3 = [];
+    arr3 = arr3.concat(arr1,arr2);
+    document.write ("<br> Mảng 1: " + mang1 + "<br>Mảng 2: " + mang2);
+    document.write("<br> Mảng gộp giữa mảng 1 & mảng 2 là: " + arr3);
 }
 
+//Viết hàm tìm số lớn nhất trong mảng 𝑎 gồm 𝑛 phần tử.
+function timMax(arr)
+{
+	arr.sort(function(a,b) {return b-a});
+    document.write("<br> Số lớn nhất trong mảng: " + arrnumber + " là:" + arr[0]);
 }
 
-addPerson();
-replaceName("Phương");
-remove("Bích");
-sapxep();
-removeM("Linh");
-inPhanTu();
+// Viết hàm tìm số âm lớn nhất trong một mảng số thực 𝑎 gồm 𝑛 phần tử
+function soAm(value, index, array) 
+{
+	return value < 0;
+}
+function taomangSoNguyenAm(array) 
+{
+	var arrnew = [];
+	arrnew = arrnumber.filter(soAm);
+    arrnew.sort(function(a,b) {return b - a});
+    document.write("<br> Số âm lớn nhất trong mảng: " + arrnumber+ " là: " + arrnew[0]);
+}
+
+// Viết hàm tìm số thực nhỏ nhất khác 0 trong mảng một chiều 𝑎 gồm 𝑛 phần tử
+function sokhac0(value, index, array) 
+{
+	return value != 0;
+}
+function minKhac0(array) 
+{
+	var arrnew = [];
+    arrnew = arrnumber.filter(sokhac0);
+    arrnew.sort(function(a,b) {return a-b});
+    document.write("<br> Số nhỏ nhất khác 0 trong mảng: " + arrnumber + " là: " + arrnew[0]);
+}
+
+kiemtraSoNguyenTo(7); 
+daoMang(arr);
+taomangSoNguyenDuong();
+gopMang(mang1, mang2);
+timMax(arrnumber);
+taomangSoNguyenAm(arrnumber);
+minKhac0(arrnumber);
 </script>
-<!-- edit your html here -->
+
