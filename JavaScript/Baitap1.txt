@@ -1,4 +1,5 @@
 <script>
+//Diep Added text to test conflict
 var arr = [1,0,5,10,-1];
 var ten = ["Bích", "Ngọc", "Lan", "hồng"];
 function sapxep()
