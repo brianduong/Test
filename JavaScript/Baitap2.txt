@@ -1,5 +1,3 @@
-//Diep edit 1
-//Diep edit 2
 <script>
 // Edit your script here
 var person = [
