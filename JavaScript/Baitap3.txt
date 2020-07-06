@@ -1,0 +1,127 @@
+<script>
+// Edit your script here
+var person = [
+{"Ho":"Trần", "Ten":"Phương", "SN": "1994", "GT": 1},
+{"Ho":"Nguyễn", "Ten":"Hồng", "SN": "1998", "GT": 0},
+{"Ho":"Đào", "Ten":"Lan", "SN": "1997", "GT": 0},
+{"Ho":"Hoàng", "Ten":"Minh", "SN": "1997", "GT": 1},
+{"Ho":"Trần", "Ten":"Hồng", "SN": "1994", "GT": 1},
+{"Ho":"Nguyễn", "Ten":"Bích", "SN": "1998", "GT": 0},
+{"Ho":"Đào", "Ten":"Bông", "SN": "1997", "GT": 1},
+{"Ho":"Hoàng", "Ten":"Ngọc", "SN": "1997", "GT": 1},
+{"Ho":"Trần", "Ten":"Anh", "SN": "1994", "GT": 0},
+{"Ho":"Nguyễn", "Ten":"Minh", "SN": "1998", "GT": 0},
+{"Ho":"Đào", "Ten":"Bích", "SN": "1997", "GT": 1}
+];
+function inPhanTu()
+{
+var i, ln;
+ln = person.length;
+for (i=0;i<ln;i++) 
+{
+var gt = (person[i].GT == 0)? "Nam": "Nữ";
+var tuoi = getAge(person[i].SN);
+document.write ("<br> Họ & Tên: " + person[i].Ho + " " + person[i].Ten + " Tuổi:" + tuoi + " Giới tính: " + gt);
+}
+}
+function addPerson()
+{
+var person2 = {"Ho":"Trần", "Ten":"Bích", "SN": "1998", "GT": 1};
+person.push(person2);
+}
+function getAge(namsinh)
+{
+var date = new Date();
+var year = date.getFullYear();
+return year - namsinh;
+}
+function replaceName(ten)
+{
+var i, ln;
+ln = person.length;
+for (i=0;i<ln;i++) 
+{
+if(ten == person[i].Ten) 
+{
+person[i].Ten = "Kiwi";
+}
+}
+}
+function remove(name)
+{
+ var len = person.length;
+ for(var i= 0;i<len;i++) 
+ {
+  if (person[i] != null) { //kiểm tra xem person [i]
+  var vName = person[i].Ten; 
+
+  if(vName==name) //Nếu tìm thấy
+  {
+   person.splice(i,1) //Xóa phần tử
+   i--; //Giữ nguyên vị trí
+  }
+ }
+  
+  
+ }
+ 
+}
+
+function remove1(name)
+{
+ var len = person.length; 
+ var i=0;
+ var timthay = false; //Cho biến tìm thấy = false
+while (i<len)
+ {
+  timthay = false; 
+  var vName = person[i].Ten;
+  if(vName==name) //Nếu tìm thấy
+  {
+   person.splice(i,1)
+   timthay = true;
+   len = person.length;
+  }
+  if (!timthay)
+  i++;
+ }
+}
+
+
+function sapxep() {
+  person.sort(function(a, b){
+    var x = a.Ten.toLowerCase();
+    var y = b.Ten.toLowerCase();
+    if (x < y) {return -1;}
+    if (x > y) {return 1;}
+    return 0;
+  });
+inPhanTu();
+}
+
+function removeM(ten)
+{
+var len = person.length;
+ for(var i= 0;i<len;i++) 
+ {
+  if (person[i] != null) 
+  { //kiểm tra xem person [i]
+  var vName = person[i].Ten.startsWith(ten);
+  if(vName) //Nếu tìm thấy
+  {
+   person.splice(i,1) //Xóa phần tử
+   i--; 
+  }
+}
+}
+
+}
+
+addPerson();
+replaceName("Phương");
+remove("Bích");
+sapxep();
+removeM("Linh");
+inPhanTu();
+</script>
+<!-- edit your html here -->
