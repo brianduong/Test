@@ -53,13 +53,16 @@ cc.Class({
         cc.director.loadScene("home");
     },
     tinhTuoi() {
-        var d,m,y,tuoi,year;
+        var d,m,y,year;
         d = parseInt(this.dayEditBox.string);
         m = parseInt(this.monthEditBox.string)
         y = parseInt(this.yearEditBox.string);
         if(isNaN(d) || isNaN(m) || isNaN(y)) {
             this.resultLabel.string = "Xem lại ngày, tháng, năm";
-        } 
+        } else {
+            year = getFullYear();
+            this.resultLabel.string = "Tuổi hiện tại là: " + (year - y);
+        }
     }
     // update (dt) {},
 });
