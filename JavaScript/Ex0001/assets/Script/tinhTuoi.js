@@ -24,14 +24,6 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        dayEditBox: {
-            default: null,
-            type: cc.EditBox
-        },
-        monthEditBox: {
-            default: null,
-            type: cc.EditBox
-        },
         yearEditBox: {
             default: null,
             type: cc.EditBox
@@ -53,16 +45,25 @@ cc.Class({
         cc.director.loadScene("home");
     },
     tinhTuoi() {
-        var d,m,y,year;
-        d = parseInt(this.dayEditBox.string);
-        m = parseInt(this.monthEditBox.string)
-        y = parseInt(this.yearEditBox.string);
-        if(isNaN(d) || isNaN(m) || isNaN(y)) {
-            this.resultLabel.string = "Xem lại ngày, tháng, năm";
-        } else {
-            year = getFullYear();
-            this.resultLabel.string = "Tuổi hiện tại là: " + (year - y);
+        var date, namsinh,y;
+        date = new Date();
+        y = date.getFullYear();
+        namsinh = parseInt(this.yearEditBox.string);
+        if(!isNaN(namsinh)) {
+            if(namsinh < 0) {
+                this.resultLabel.string = "Năm sinh không được là số âm";
+            } else {
+                if(namsinh > y) {
+                    this.resultLabel.string = "Năm sinh không được lớn hơn năm hiện tại:" + " " + y;
+                } else {
+                    this.resultLabel.string = "Tuổi: " + (y - namsinh);
+                }
+            } 
+            } else {
+                this.resultLabel.string = "Năm sinh chỉ có thể là số!"
+            }
+            
+                
         }
-    }
     // update (dt) {},
 });

@@ -47,29 +47,35 @@ cc.Class({
     tinhtien() {
         var sokm, tongtien;
         tongtien = 0;
-        sokm = this.nhapSoEditBox.string;
+        sokm = parseInt(this.nhapSoEditBox.string);
         if (isNaN(sokm)) {
+            console.log = "Hello";
             this.resultLabel.string = "Mời nhập số!";
-        } else {
-            if (sokm <= 1) 
-	    {
-    	tongtien = sokm * 15000;
+        } else if(sokm < 0) {
+                this.resultLabel.string = "Số km không thể nhỏ hơn 0";
+            } else {
+                if (sokm <= 1) 
+                {
+                tongtien = sokm * 15000;
+                }
+                if (sokm > 1 && sokm <= 5)
+                {
+                    tongtien = 15000 + (sokm - 1) * 13500;
+                }
+                if (sokm > 5)
+                {
+                    tongtien  = 15000 + 4*15000 + (sokm - 5)*11000;
+                }
+                if (sokm > 120)
+                {
+                    tongtien  = (15000 + 4*15000 + (sokm - 5)*11000)*0.9;
+                }
+                this.resultLabel.string = "Số tiền cần trả: " + tongtien;
         }
-        if (sokm > 1 && sokm <= 5)
-	    {
-    	    tongtien = 15000 + (sokm - 1) * 13500;
-        }
-        if (sokm > 5)
-	    {
-    	    tongtien  = 15000 + 4*15000 + (sokm - 5)*11000;
-        }
-        if (sokm > 120)
-	    {
-        	tongtien  = (15000 + 4*15000 + (sokm - 5)*11000)*0.9;
-        }
-        }
-        this.resultLabel.string = "Số tiền cần trả: " + tongtien;
-        }
+            
+        
+            }
+
 
     
     // update (dt) {},
