@@ -31,5 +31,8 @@ cc.Class({
     },
     chuyenScreen5() {
         cc.director.loadScene("tinhCungHD");
+    },
+    chuyenScreen6() {
+        cc.director.loadScene("arrayex");
     }
 });
