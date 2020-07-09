@@ -2,13 +2,18 @@
   "collision-matrix": [
     [
       true
+    ],
+    [
+      false,
+      false
     ]
   ],
   "excluded-modules": [],
   "group-list": [
-    "default"
+    "default",
+    "New Group 3"
   ],
-  "start-scene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
+  "start-scene": "2f6a0c8e-dda7-4044-8688-e794a2da8eea",
   "design-resolution-width": 960,
   "design-resolution-height": 640,
   "fit-width": false,
