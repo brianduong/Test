@@ -28,5 +28,8 @@ cc.Class({
     },
     chuyenScreen4() {
         cc.director.loadScene("tinhDTB");
+    },
+    chuyenScreen5() {
+        cc.director.loadScene("tinhCungHD");
     }
 });
