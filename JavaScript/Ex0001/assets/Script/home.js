@@ -11,6 +11,13 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        var txt = "12/03/2020";   // String
+        var arr = txt.split("/"); 
+        var ln = arr.length;
+        for(var i = 0; i<ln; i++) {
+            console.log(arr[i]);
+        }
+
     },
 
     // called every frame
@@ -34,5 +41,8 @@ cc.Class({
     },
     chuyenScreen6() {
         cc.director.loadScene("arrayex");
+    }, 
+    chuyenSCreen7() {
+        cc.director.loadScene("checkDate");
     }
 });
