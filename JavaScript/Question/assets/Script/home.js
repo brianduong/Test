@@ -54,6 +54,14 @@ cc.Class({
         score: {
             default: 0,
             type: cc.Integer
+        }, 
+        demSoCau: {
+            default: 0,
+            type: cc.Integer
+        }, 
+        showSoCauRichText: {
+            default: null, 
+            type: cc.RichText
         }
         // defaults, set visually when attaching this script to the Canvas
     },
@@ -76,10 +84,11 @@ cc.Class({
         this.aLabel.string = this.questionarr[0].A;
         this.bLabel.string = this.questionarr[0].B;
         this.cLabel.string = this.questionarr[0].C;
-
+        this.demSoCau = this.demSoCau + 1;
+        this.showSoCauRichText.string = "Số câu đã làm là: " + this.demSoCau;
     }, 
     chosecau1a() {
-        this.showkqLabel.string = "Đáp án sai";
+        this.showkqLabel.string = "Đáp án sai. Kết quả đúng là: " + this.questionarr[0].B;
         this.resultLabel.string = "Số câu đúng: " + this.score;
     }, 
     chosecau1b() {
@@ -88,7 +97,7 @@ cc.Class({
         this.resultLabel.string = "Số câu đúng: " + this.score;
     },
     choosecau1c() {
-        this.showkqLabel.string = "Đáp án sai";
+        this.showkqLabel.string = "Đáp án sai. Kết quả đúng là: " + this.questionarr[0].B;
         this.resultLabel.string = "Số câu đúng: " + this.score;
     },
     choosecau2() {
@@ -96,13 +105,15 @@ cc.Class({
         this.a1Label.string = this.questionarr[1].A;
         this.b1Label.string = this.questionarr[1].B;
         this.c1Label.string = this.questionarr[1].C;
+        this.demSoCau = this.demSoCau + 1;
+        this.showSoCauRichText.string = "Số câu đã làm là: " + this.demSoCau;
     }, 
     chosecau2a() {
-        this.showkqLabel.string = "Đáp án sai";
+        this.showkqLabel.string = "Đáp án sai. Kết quả đúng là: " + this.questionarr[1].C;
         this.resultLabel.string = "Số câu đúng: " + this.score;
     }, 
     chosecau2b() {
-        this.showkqLabel.string = "Đáp án sai";
+        this.showkqLabel.string = "Đáp án sai. Kết quả đúng là: " + this.questionarr[1].C;
         this.resultLabel.string = "Số câu đúng: " + this.score;
     },
     choosecau2c() {
@@ -115,19 +126,24 @@ cc.Class({
         this.a2Label.string = this.questionarr[2].A;
         this.b2Label.string = this.questionarr[2].B;
         this.c2Label.string = this.questionarr[2].C;
+        this.demSoCau = this.demSoCau + 1;
+        this.showSoCauRichText.string = "Số câu đã làm là: " + this.demSoCau;
     }, 
     chosecau3a() {
-        this.showkqLabel.string = "Đáp án sai";
-        this.resultLabel.string = "Số câu đúng: " + (this.score - 1);
+        this.showkqLabel.string = "Đáp án sai. Kết quả đúng là: " + this.questionarr[2].B;
+        this.resultLabel.string = "Số câu đúng: " + this.score;
     }, 
     chosecau3b() {
-        this.showkqLabel.string = "Đáp án sai";
-        this.resultLabel.string = "Số câu đúng: " + this.score;
-    },
-    choosecau3c() {
         this.showkqLabel.string = "Đáp án đúng";
         this.score = this.score + 1
         this.resultLabel.string = "Số câu đúng: " + this.score;
+    },
+    choosecau3c() {
+        this.showkqLabel.string = "Đáp án sai. Kết quả đúng là: " + this.questionarr[2].B;
+        this.resultLabel.string = "Số câu đúng: " + this.score;
     }, 
+    loadnextscreen() {
+        cc.director.loadScene("baiTN");
+    }
 
 });
