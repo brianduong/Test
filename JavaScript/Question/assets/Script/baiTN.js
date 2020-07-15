@@ -49,8 +49,10 @@ cc.Class({
         cLabel: {
             default: null,
             type: cc.Label
-        }
-        
+        },
+        nextButton: cc.Button,
+        backButton: cc.Button,
+        xemKQButton: cc.Button
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -72,6 +74,10 @@ cc.Class({
         this.stepLabel.string = "Step: " + this.step;
         this.score = 0;
         this.scoreLabel.string = "Score: " + this.score;
+        if(this.step == 0) {
+            this.backButton.node.active =  false;
+            this.xemKQButton.node.active = false;
+        }
     },
     start () {
     },
@@ -123,6 +129,9 @@ cc.Class({
         var ln = this.cauhoiarr.length;
         this.step = this.step + 1;
         this.stepLabel.string = "Step: " + this.step;
+        if(this.step > 0) {
+            this.backButton.node.active = true;
+        }
         if(this.step < ln) {
             this.cauhoiLabel.string = "Câu " + this.cauhoiarr[this.step].STT + ": " + this.cauhoiarr[this.step].Cauhoi;
             this.aLabel.string = this.cauhoiarr[this.step].A;
@@ -131,29 +140,27 @@ cc.Class({
         } else {
                 this.step = this.cauhoiarr.length;
                 this.stepLabel.string = "Step: " + this.step;
-                nextButton.node.active = false;
+                this.nextButton.node.active = false;
+                this.xemKQButton.node.active = true;
         }
         }, 
     chooseBack() {
         this.stepLabel.string = "Step: " + this.step;
         var ln = this.cauhoiarr.length;
-        if(this.step == 0) {
-            backButton.node.active = false;
-        } 
-        if(this.step < ln && this.step > 0) {
+        if(this.step < ln) {
             this.step = this.step - 1;
             this.cauhoiLabel.string = "Câu " + this.cauhoiarr[this.step].STT + ": " + this.cauhoiarr[this.step].Cauhoi;
             this.aLabel.string = this.cauhoiarr[this.step].A;
             this.bLabel.string = this.cauhoiarr[this.step].B;
             this.cLabel.string = this.cauhoiarr[this.step].C;
-        } 
+        }
     },
     xemKQ() {
         var ln = this.cauhoiarr.length;
         this.step = this.step;
         this.stepLabel.string = "Step: " + this.step;
         if(this.step < ln) {
-            xemKQButton.node.active = false; 
+            this.xemKQButton.node.active = false; 
         } else {
             this.resultLabel.string = "Bạn đã làm đúng: " + this.score + "/" + ln + "\n Kết quả: ";
             for(var i = 0; i < ln; i++) {
