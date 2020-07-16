@@ -4,7 +4,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
+var datascript = require("data");
 cc.Class({
     extends: cc.Component,
 
@@ -13,6 +13,10 @@ cc.Class({
         cauhoiLabel: {
             default: null, 
             type: cc.Label
+        },
+        cauhoiRichText: {
+            default: null,
+            type: cc.RichText
         },
         resultLabel: {
             default: null,
@@ -52,29 +56,20 @@ cc.Class({
         },
         nextButton: cc.Button,
         backButton: cc.Button,
-        xemKQButton: cc.Button
+        xemKQButton: cc.Button,
+        color:cc.color
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.cauhoiarr = [{"STT" : "1", "Cauhoi":"Số bé nhất có hai chữ số là:", "A": "11","B":"12","C":"23","DapAn": "A","User":"0"},
-        {"STT" : "2", "Cauhoi":"Số lớn nhất có hai chữ số là:", "A": "22","B":"99","C":"66", "DapAn": "B","User":"0"},
-        {"STT" : "3", "Cauhoi":"Các loài hoa có hình dạng, kích thước?", "A": "Giống nhau","B":"Bằng nhau","C":"Khác nhau", "DapAn": "C","User":"0"},
-        {"STT" : "4", "Cauhoi":"Từ 1 - 100 có bao nhiêu chữ số tròn chục?", "A": "9 số","B":"10 số","C":"11 số","DapAn": "A","User":"0"},
-        {"STT" : "5", "Cauhoi":"10 đơn vị bằng mấy chục?", "A": "3 chục","B":"2 chục","C":"1 chục","DapAn": "C","User":"0"},
-        {"STT" : "6", "Cauhoi":"Hai số liền nhau hơn, kém nhau mấy đơn vị?", "A": "1 đơn vị","B":"2 đơn vị","C":"5 đơn vị","DapAn": "A","User":"0"},
-        {"STT" : "7", "Cauhoi":"Con vật nào có lợi?", "A": "Mèo","B":"Chuột","C":"Muỗi","DapAn": "A","User":"0"},
-        {"STT" : "8", "Cauhoi":"Cây sống ở dưới nước là:", "A": "Hoa sen","B":"Cây keo","C":"Cây ngô","DapAn": "A","User":"0"},
-        {"STT" : "9", "Cauhoi":"Loài vật sống ở dưới nước là:", "A": "Cá","B":"Thỏ","C":"Chó","DapAn": "A","User":"0"}];
-        this.cauhoiLabel.string = "Câu " + this.cauhoiarr[0].STT + ": " + this.cauhoiarr[0].Cauhoi;
-        this.aLabel.string = this.cauhoiarr[0].A;
-        this.bLabel.string = this.cauhoiarr[0].B;
-        this.cLabel.string = this.cauhoiarr[0].C;
-        this.stepLabel.string = "Step: " + this.step;
+        this.scoreLabel.string = "Chọn đáp án đúng nhất trong các đáp án." + "\n \nCâu " + datascript.data[0].STT + ": ";
+        this.cauhoiRichText.string = datascript.data[0].Cauhoi;
+        this.aLabel.string = "A." + datascript.data[0].A;
+        this.bLabel.string = "B." + datascript.data[0].B;
+        this.cLabel.string = "C." + datascript.data[0].C;
         this.score = 0;
-        this.scoreLabel.string = "Score: " + this.score;
-        if(this.step == 0) {
+        if(this.step <= 0) {
             this.backButton.node.active =  false;
             this.xemKQButton.node.active = false;
         }
@@ -82,91 +77,133 @@ cc.Class({
     start () {
     },
 
-    // update (dt) {},
+    //update (dt) {},
     loadScreenHome() {
-        cc.director.loadScene ("helloworld");
+        cc.director.loadScene ("home");
     }, 
     chooseA() {
-       var ln = this.cauhoiarr.length;
+       var ln = datascript.total;
+       this.resetColor();
        if(this.step < ln) {
-           this.cauhoiarr[this.step].User = "A";
-           if(this.cauhoiarr[this.step].User == this.cauhoiarr[this.step].DapAn) {
-               this.resultLabel.string = "Bạn chọn đáp án: " + this.cauhoiarr[this.step].User;
-               this.score = this.score + 1;
-               this.scoreLabel.string = "Score: " + this.score;
+          datascript.data[this.step].User = "A";
+          this.inDapAn();
+           if(datascript.data[this.step].User == "A") {
+            this.aLabel.node.color = new cc.Color(255,0,0);
            } else {
-               this.resultLabel.string = "Bạn chọn đáp án: " + this.cauhoiarr[this.step].User;
+            this.aLabel.node.color = new cc.Color(0,0,0);
            }
        }
     },
     chooseB() {
-        var ln = this.cauhoiarr.length;
+        var ln = datascript.total;
+        this.resetColor();
         if(this.step < ln) {
-            this.cauhoiarr[this.step].User = "B";
-            if(this.cauhoiarr[this.step].User == this.cauhoiarr[this.step].DapAn) {
-                this.resultLabel.string = "Bạn chọn đáp án: " + this.cauhoiarr[this.step].User;
-                this.score = this.score + 1;
-                this.scoreLabel.string = "Score: " + this.score;
-            } else {
-                this.resultLabel.string = "Bạn chọn đáp án: " + this.cauhoiarr[this.step].User;
-            }
+           datascript.data[this.step].User = "B";
+           this.inDapAn();
+            if(datascript.data[this.step].User == "B") {
+                this.bLabel.node.color = new cc.Color(255,0,0);
+               } else {
+                this.bLabel.node.color = new cc.Color(0,0,0);
+               }
         }
     }, 
     chooseC() {
-        var ln = this.cauhoiarr.length;
+        var ln = datascript.total;
+        this.resetColor();
         if(this.step < ln) {
-            this.cauhoiarr[this.step].User = "C";
-            if(this.cauhoiarr[this.step].User == this.cauhoiarr[this.step].DapAn) {
-                this.resultLabel.string = "Bạn chọn đáp án: " + this.cauhoiarr[this.step].User;
-                this.score = this.score + 1;
-                this.scoreLabel.string = "Score: " + this.score;
-            } else {
-                this.resultLabel.string = "Bạn chọn đáp án: " + this.cauhoiarr[this.step].User;
-            }
+           datascript.data[this.step].User = "C";
+           this.inDapAn();
+           if(datascript.data[this.step].User == "C") {
+            this.cLabel.node.color = new cc.Color(255,0,0);
+           } else {
+            this.cLabel.node.color = new cc.Color(0,0,0);
+           }
         }
     },
     choosenext() {
-        var ln = this.cauhoiarr.length;
-        this.step = this.step + 1;
-        this.stepLabel.string = "Step: " + this.step;
-        if(this.step > 0) {
-            this.backButton.node.active = true;
-        }
-        if(this.step < ln) {
-            this.cauhoiLabel.string = "Câu " + this.cauhoiarr[this.step].STT + ": " + this.cauhoiarr[this.step].Cauhoi;
-            this.aLabel.string = this.cauhoiarr[this.step].A;
-            this.bLabel.string = this.cauhoiarr[this.step].B;
-            this.cLabel.string = this.cauhoiarr[this.step].C;
+        var ln = datascript.total;
+        console.log(typeof ln);
+        this.resetColor();
+        if(datascript.data[this.step].User == 0) {
+            this.resultLabel.string = "Bạn chưa chọn câu trả lời";
         } else {
-                this.step = this.cauhoiarr.length;
-                this.stepLabel.string = "Step: " + this.step;
+            this.step = this.step + 1;
+            this.scoreLabel.string = "Chọn đáp án đúng nhất trong các đáp án." + "\n \nCâu " +datascript.data[0].STT + ": ";            this.resultLabel.string = " ";
+            if(this.step > 0) {
+            this.backButton.node.active = true; 
+            } 
+            if(this.step == 0) {
+                this.backButton.node.active = false; 
+            }
+            if(this.step < ln) {
+            this.inCauHoi();
+            } else {
+                this.cauhoiRichText.string = "";
+                this.aLabel.string = "";
+                this.bLabel.string = "";
+                this.cLabel.string = "";
+                this.scoreLabel.string = "Đã hoàn thành";
                 this.nextButton.node.active = false;
+                this.backButton.node.active = false;
                 this.xemKQButton.node.active = true;
-        }
-        }, 
+            }
+            }
+            }, 
     chooseBack() {
-        this.stepLabel.string = "Step: " + this.step;
-        var ln = this.cauhoiarr.length;
+        var ln = datascript.total;
         if(this.step < ln) {
             this.step = this.step - 1;
-            this.cauhoiLabel.string = "Câu " + this.cauhoiarr[this.step].STT + ": " + this.cauhoiarr[this.step].Cauhoi;
-            this.aLabel.string = this.cauhoiarr[this.step].A;
-            this.bLabel.string = this.cauhoiarr[this.step].B;
-            this.cLabel.string = this.cauhoiarr[this.step].C;
+            if(this.step == 0) {
+                this.backButton.node.active = false;
+                this.resultLabel.string = "Bạn chọn đáp án: " + datascript.data[this.step].User;
+                if(datascript.data[this.step].User == "A") {
+                    this.aLabel.node.color = new cc.Color(255,0,0);
+                }
+                if(datascript.data[this.step].User == "B") {
+                    this.bLabel.node.color = new cc.Color(255,0,0);
+                }
+                if(datascript.data[this.step].User == "C") {
+                    this.cLabel.node.color = new cc.Color(255,0,0);
+                }
+            }
+            this.inCauHoi();
         }
     },
     xemKQ() {
-        var ln = this.cauhoiarr.length;
+        var ln = datascript.total;
+        var ketqua = "";
         this.step = this.step;
-        this.stepLabel.string = "Step: " + this.step;
         if(this.step < ln) {
             this.xemKQButton.node.active = false; 
         } else {
-            this.resultLabel.string = "Bạn đã làm đúng: " + this.score + "/" + ln + "\n Kết quả: ";
+            this.resultLabel.string = "Đúng: " + this.score + "/" + ln;
             for(var i = 0; i < ln; i++) {
-                this.dapanLabel.string += "\n Câu " + this.cauhoiarr[i].STT + ": " + "Chọn: " + this.cauhoiarr[i].User + ", KQ: " + this.cauhoiarr[i].DapAn;
+                console.log(typeof ketqua);
+                ketqua += "\n Câu " + datascript.data[i].STT + ": " + "Chọn: " + datascript.data[i].User + ", KQ: " +datascript.data[i].DapAn;
             }
+            this.dapanLabel.string = "Đáp án: " + ketqua;
+            this.backButton.node.active = false;
+            this.nextButton.node.active = false;
+        }
+    },
+    resetColor() {
+        this.cLabel.node.color = new cc.Color(0,0,0);
+        this.bLabel.node.color = new cc.Color(0,0,0);
+        this.aLabel.node.color = new cc.Color(0,0,0);
+    },
+    inCauHoi() {
+        this.scoreLabel.string = "Chọn đáp án đúng nhất trong các đáp án." + "\n \nCâu " + datascript.data[this.step].STT + ": ";
+        this.cauhoiRichText.string = datascript.data[this.step].Cauhoi;
+        this.aLabel.string = "A." + datascript.data[this.step].A;
+        this.bLabel.string = "B." + datascript.data[this.step].B;
+        this.cLabel.string = "C." + datascript.data[this.step].C;
+    },
+    inDapAn() {
+        this.resultLabel.string = "Bạn chọn đáp án: " + datascript.data[this.step].User;
+        if(datascript.data[this.step].User == datascript.data[this.step].DapAn) {
+            this.score = this.score + 1;
+        } else {
+            this.resultLabel.string = "Bạn chọn đáp án: " + datascript.data[this.step].User;
         }
     }
-
 });
