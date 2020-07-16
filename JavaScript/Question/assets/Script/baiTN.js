@@ -1,10 +1,5 @@
-// Learn cc.Class:
-//  - https://docs.cocos.com/creator/manual/en/scripting/class.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 var datascript = require("data");
+var ln = datascript.total;
 cc.Class({
     extends: cc.Component,
 
@@ -63,7 +58,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.scoreLabel.string = "Chọn đáp án đúng nhất trong các đáp án." + "\n \nCâu " + datascript.data[0].STT + ": ";
+        this.scoreLabel.string = "Chọn đáp án đúng nhất trong các đáp án." + "\n Câu " + datascript.data[0].STT + ": ";
         this.cauhoiRichText.string = datascript.data[0].Cauhoi;
         this.aLabel.string = "A." + datascript.data[0].A;
         this.bLabel.string = "B." + datascript.data[0].B;
@@ -79,10 +74,9 @@ cc.Class({
 
     //update (dt) {},
     loadScreenHome() {
-        cc.director.loadScene ("home");
+        cc.director.loadScene("home");
     }, 
     chooseA() {
-       var ln = datascript.total;
        this.resetColor();
        if(this.step < ln) {
           datascript.data[this.step].User = "A";
@@ -95,7 +89,6 @@ cc.Class({
        }
     },
     chooseB() {
-        var ln = datascript.total;
         this.resetColor();
         if(this.step < ln) {
            datascript.data[this.step].User = "B";
@@ -108,7 +101,6 @@ cc.Class({
         }
     }, 
     chooseC() {
-        var ln = datascript.total;
         this.resetColor();
         if(this.step < ln) {
            datascript.data[this.step].User = "C";
@@ -121,14 +113,17 @@ cc.Class({
         }
     },
     choosenext() {
-        var ln = datascript.total;
-        console.log(typeof ln);
-        this.resetColor();
+       this.resetColor();
         if(datascript.data[this.step].User == 0) {
             this.resultLabel.string = "Bạn chưa chọn câu trả lời";
         } else {
             this.step = this.step + 1;
-            this.scoreLabel.string = "Chọn đáp án đúng nhất trong các đáp án." + "\n \nCâu " +datascript.data[0].STT + ": ";            this.resultLabel.string = " ";
+            this.scoreLabel.string = "Chọn đáp án đúng nhất trong các đáp án." + "\n \nCâu " + datascript.data[0].STT + ": ";
+            if(datascript.data[this.step].User == 0) {
+                this.resultLabel.string = "";
+            } else {
+                this.inColor();
+            }
             if(this.step > 0) {
             this.backButton.node.active = true; 
             } 
@@ -150,32 +145,26 @@ cc.Class({
             }
             }, 
     chooseBack() {
-        var ln = datascript.total;
+        this.resetColor()
         if(this.step < ln) {
             this.step = this.step - 1;
             if(this.step == 0) {
                 this.backButton.node.active = false;
-                this.resultLabel.string = "Bạn chọn đáp án: " + datascript.data[this.step].User;
-                if(datascript.data[this.step].User == "A") {
-                    this.aLabel.node.color = new cc.Color(255,0,0);
-                }
-                if(datascript.data[this.step].User == "B") {
-                    this.bLabel.node.color = new cc.Color(255,0,0);
-                }
-                if(datascript.data[this.step].User == "C") {
-                    this.cLabel.node.color = new cc.Color(255,0,0);
-                }
+                this.inColor();
             }
             this.inCauHoi();
+            this.inColor();
         }
     },
     xemKQ() {
-        var ln = datascript.total;
         var ketqua = "";
         this.step = this.step;
         if(this.step < ln) {
             this.xemKQButton.node.active = false; 
         } else {
+            if(this.score > ln) {
+                this.score = ln;
+            }
             this.resultLabel.string = "Đúng: " + this.score + "/" + ln;
             for(var i = 0; i < ln; i++) {
                 console.log(typeof ketqua);
@@ -205,5 +194,17 @@ cc.Class({
         } else {
             this.resultLabel.string = "Bạn chọn đáp án: " + datascript.data[this.step].User;
         }
+    },
+    inColor() {
+        this.resultLabel.string = "Bạn chọn đáp án: " + datascript.data[this.step].User;
+                if(datascript.data[this.step].User == "A") {
+                    this.aLabel.node.color = new cc.Color(255,0,0);
+                }
+                if(datascript.data[this.step].User == "B") {
+                    this.bLabel.node.color = new cc.Color(255,0,0);
+                }
+                if(datascript.data[this.step].User == "C") {
+                    this.cLabel.node.color = new cc.Color(255,0,0);
+                }
     }
 });

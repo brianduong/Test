@@ -297,7 +297,7 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 255,
+      "g": 204,
       "b": 255,
       "a": 255
     },
@@ -2112,7 +2112,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        363.281,
+        352.673,
         0,
         0,
         0,
@@ -2183,7 +2183,7 @@
     "_alignFlags": 1,
     "_left": 0,
     "_right": 0,
-    "_top": 91.519,
+    "_top": 102.12700000000001,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -3192,7 +3192,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "2b/fcdPJ9Hw4kmd3017Qlx"
+    "_id": "c9/ycqNhtDY4uqr/qOGJhw"
   },
   {
     "__type__": "cc.Label",
@@ -3226,7 +3226,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "83q1BAF5dBzIO8l7KJi4HF"
+    "_id": "4cWwLjpuhOg4dxrMJRYBcN"
   },
   {
     "__type__": "cc.RichText",
