@@ -2,6 +2,10 @@
   "collision-matrix": [
     [
       true
+    ],
+    [
+      false,
+      false
     ]
   ],
   "excluded-modules": [
@@ -11,9 +15,10 @@
     "SafeArea"
   ],
   "group-list": [
-    "default"
+    "default",
+    "New Group 3"
   ],
-  "start-scene": "7c8335bc-3744-4ca5-a5ae-38e0d8025bce",
+  "start-scene": "74218186-7bf8-46bc-a17e-55d2ed05e969",
   "design-resolution-width": 640,
   "design-resolution-height": 960,
   "fit-width": true,
